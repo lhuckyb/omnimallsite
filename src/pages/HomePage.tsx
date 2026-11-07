@@ -1,619 +1,437 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { motion, useReducedMotion, type Variants } from 'framer-motion';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import {
+  ArrowUpRight,
   ArrowRight,
-  ShieldCheck,
-  ShoppingBag,
-  Store,
-  MapPin,
-  CheckCircle2,
-  Search,
-  Sparkles,
-  Smartphone,
-  Layers,
-  Zap,
-  Users,
-  Check,
-  Lock,
   BadgeCheck,
+  CheckCircle2,
+  ClipboardList,
+  MapPin,
+  MessageCircle,
+  PackageSearch,
+  SlidersHorizontal,
+  Store,
+  WalletCards,
   Wrench,
-  Clock,
-  ChevronRight,
-  Laptop,
-  Camera,
-  BookOpen,
-  Tag,
+  X,
 } from 'lucide-react';
-import { ASSETS } from '../data/assets';
-import { CAMPUSES } from '../data/mockData';
 import { DotField } from '../components/ui/dot-field';
 import { MockTablet } from '../components/ui/MockTablet';
 
-export const HomePage: React.FC = () => {
-  const navigate = useNavigate();
-  const [searchQuery, setSearchQuery] = useState('');
-  const [activeCampusTab, setActiveCampusTab] = useState<string>('upsa');
+const highlights = [
+  {
+    icon: PackageSearch,
+    title: 'Find products and stores',
+    description:
+      'Search products, services, brands, and stores. Listing pages show details and the next step available for that item.',
+    href: '/marketplace',
+    link: 'Explore marketplace features',
+  },
+  {
+    icon: MessageCircle,
+    title: 'Follow campus conversations',
+    description:
+      'Explore posts across For You, Campus, Trends, and Vendors. Like, comment, share, or save posts.',
+    href: '/explore',
+    link: 'See the Explore feed',
+  },
+  {
+    icon: Wrench,
+    title: 'Discover services',
+    description:
+      'Compare service details, provider, price format, and availability, then send an enquiry from a listing.',
+    href: '/services',
+    link: 'Learn about services',
+  },
+];
 
-  // Interactive Fee Calculator State
-  const [sellingPrice, setSellingPrice] = useState<number>(250);
+export const HomePage: React.FC = () => (
+  <div className="min-h-screen overflow-x-hidden bg-white text-[#202124] selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
+    <DotField
+      headline="Sell with ease, Buy with confidence."
+      backgroundImage="/2.png"
+      description="Explore products and storefronts, enquire about peer services, and follow campus conversations—all through OmniMall."
+      className="border-b border-orange-100"
+      actions={
+        <>
+          <Link
+            to="/marketplace"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full bg-[#FF5B00] px-6 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00] sm:w-auto"
+          >
+            <PackageSearch className="h-4 w-4" aria-hidden="true" />
+            <span>Explore marketplace</span>
+          </Link>
+          <Link
+            to="/sell"
+            className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white/90 px-6 text-sm font-bold text-slate-800 transition-colors hover:border-orange-200 hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00] sm:w-auto"
+          >
+            <Store className="h-4 w-4 text-[#FF5B00]" aria-hidden="true" />
+            <span>Seller guide</span>
+          </Link>
+        </>
+      }
+    />
 
-  // Respect user preference for reduced motion
-  const shouldReduceMotion = useReducedMotion();
-
-  // Animation variants
-  const fadeInVariants: Variants = {
-    hidden: { opacity: 0, y: shouldReduceMotion ? 0 : 16 },
-    visible: (custom: number = 0) => ({
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: shouldReduceMotion ? 0 : 0.45,
-        delay: shouldReduceMotion ? 0 : custom * 0.06,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    }),
-  };
-
-  const staggerContainer: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: shouldReduceMotion ? 0 : 0.06,
-      },
-    },
-  };
-
-  const handleHeroSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery.trim()) {
-      navigate(`/marketplace?search=${encodeURIComponent(searchQuery)}`);
-    } else {
-      navigate('/marketplace');
-    }
-  };
-
-  const selectedCampusData = CAMPUSES.find((c) => c.id === activeCampusTab) || CAMPUSES[0];
-
-  return (
-    <div className="min-h-screen bg-white text-[#202124] overflow-x-hidden selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
-      {/* Interactive DotField Hero for "Sell with ease, buy with confidence." */}
-      <DotField
-        headline="Sell with ease, buy with confidence."
-        color="#FF5B00"
-        fontFamily="Manrope, sans-serif"
-        fontWeight={800}
-        description="The structured digital marketplace built specifically for university campuses. Connecting student buyers, verified student storefronts, and skilled peer service providers."
-        actions={
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 w-full sm:w-auto">
+    <section className="overflow-hidden border-b border-orange-100 bg-gradient-to-br from-[#FFFCF9] via-white to-[#FFF3E9] py-10 sm:py-14 lg:py-16">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
+        <div className="space-y-5 lg:col-span-6">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            Campus marketplace
+          </span>
+          <h1 className="max-w-xl font-heading text-3xl font-black leading-tight tracking-tight text-[#202124] sm:text-4xl lg:text-[2.75rem]">
+            Find products and services. Discover what’s happening on campus.
+          </h1>
+          <p className="max-w-xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            Explore product listings and storefronts, enquire about services, and follow community
+            posts—all in the OmniMall app.
+          </p>
+          <div className="flex flex-wrap gap-3 pt-1">
             <Link
               to="/marketplace"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-xs sm:text-sm font-bold text-white bg-[#FF5B00] hover:bg-orange-600 transition-all shadow-sm hover:shadow-[0_4px_16px_rgba(255,91,0,0.3)] active:scale-[.97] w-full sm:w-auto"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
             >
-              <ShoppingBag className="w-4 h-4" />
-              <span>Explore Marketplace</span>
+              <PackageSearch className="h-4 w-4" aria-hidden="true" />
+              <span>Explore marketplace</span>
             </Link>
             <Link
               to="/sell"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-full px-6 text-xs sm:text-sm font-bold text-slate-800 bg-white hover:bg-slate-50 border border-slate-200/90 active:scale-[.97] transition-all shadow-2xs w-full sm:w-auto"
+              className="inline-flex min-h-11 items-center gap-2 rounded-full border border-slate-200 bg-white px-5 text-sm font-bold text-slate-800 transition-colors hover:border-orange-200 hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
             >
-              <Store className="w-4 h-4 text-[#FF5B00]" />
-              <span>Open Student Storefront</span>
+              <Store className="h-4 w-4" aria-hidden="true" />
+              <span>Seller guide</span>
             </Link>
           </div>
-        }
-      />
+        </div>
+        <div className="lg:col-span-6">
+          <MockTablet />
+          <p className="mt-3 text-center text-xs text-slate-500">
+            Illustrative interface preview — not live listings or account data.
+          </p>
+        </div>
+      </div>
+    </section>
 
-      {/* Campus Quick Search & Discovery Spotlight */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#FFF9F5] via-white to-white py-12 sm:py-16 border-b border-slate-100">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            {/* Left Column: Search & Proof Points */}
-            <motion.div
-              className="lg:col-span-6 space-y-5 sm:space-y-6"
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, margin: "-60px" }}
-              variants={staggerContainer}
+    <section className="bg-gradient-to-b from-[#FFF9F5] to-white py-16 sm:py-24">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-2xl space-y-3 text-center sm:mb-14">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            One platform, different ways to connect
+          </span>
+          <h2 className="font-heading text-2xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            More than a product listing
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
+            OmniMall brings marketplace discovery, seller tools, service enquiries, and community
+            posts together.
+          </p>
+        </div>
+
+        <div className="grid gap-4 md:grid-cols-3">
+          {highlights.map(({ icon: Icon, title, description, href, link }) => (
+            <article
+              key={title}
+              className="flex h-full flex-col rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm sm:p-7"
             >
-              <div className="space-y-2">
-                <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00] block">
-                  Instant Campus Lookup
-                </span>
-                <h2 className="text-2xl sm:text-3xl font-extrabold text-[#202124] tracking-tight font-heading">
-                  Find verified items and services on campus today.
-                </h2>
-                <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                  Search across student listings near your hostel or lecture hall with direct transparent prices in Ghanaian Cedis (GH₵).
-                </p>
-              </div>
-
-              {/* Mobile-Optimized Search Bar */}
-              <motion.div variants={fadeInVariants} custom={1} className="max-w-xl">
-                <form
-                  onSubmit={handleHeroSearch}
-                  className="flex items-center bg-white p-1.5 rounded-2xl border border-slate-200 shadow-sm focus-within:border-[#FF5B00] focus-within:ring-2 focus-within:ring-[#FF5B00]/15 transition-all"
-                >
-                  <Search className="w-4 h-4 text-slate-400 ml-2.5 shrink-0" />
-                  <input
-                    type="text"
-                    placeholder="Search electronics, textbooks, services, hosteller fits..."
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs sm:text-sm text-[#202124] bg-transparent focus:outline-none placeholder:text-slate-400"
-                  />
-                  <button
-                    type="submit"
-                    className="px-4 py-2 text-xs font-bold text-white bg-[#FF5B00] hover:bg-orange-600 active:scale-98 rounded-xl transition-all shrink-0 flex items-center gap-1"
-                  >
-                    <span>Search</span>
-                    <ArrowRight className="w-3.5 h-3.5" />
-                  </button>
-                </form>
-
-                {/* Popular Keywords */}
-                <div className="flex items-center gap-1.5 mt-2 overflow-x-auto no-scrollbar text-[11px] text-slate-500">
-                  <span className="font-semibold text-slate-700 shrink-0">Popular:</span>
-                  {['Textbooks & Coursepacks', 'Tech & Audio', 'Hostel Essentials', 'Campus Photography', 'Graphic Design'].map((tag) => (
-                    <button
-                      key={tag}
-                      type="button"
-                      onClick={() => {
-                        setSearchQuery(tag);
-                        navigate(`/marketplace?search=${encodeURIComponent(tag)}`);
-                      }}
-                      className="shrink-0 px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-orange-50 hover:text-[#FF5B00] transition-colors"
-                    >
-                      {tag}
-                    </button>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Proof Points */}
-              <motion.div
-                variants={fadeInVariants}
-                custom={2}
-                className="pt-4 border-t border-slate-100 grid grid-cols-3 gap-2 sm:gap-4 text-left"
+              <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-50 text-[#FF5B00]">
+                <Icon className="h-5 w-5" aria-hidden="true" />
+              </span>
+              <h3 className="mt-5 font-heading text-lg font-bold text-slate-900">{title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-slate-600">{description}</p>
+              <Link
+                to={href}
+                className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#FF5B00] transition-colors hover:text-orange-700 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
               >
-                <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-100">
-                  <div className="text-lg sm:text-xl font-black text-[#202124] font-heading">
-                    UPSA
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-slate-500">Flagship Launch</div>
-                </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-100">
-                  <div className="text-lg sm:text-xl font-black text-[#202124] font-heading">
-                    100%
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-slate-500">Student Verified</div>
-                </div>
-                <div className="p-2.5 sm:p-3 rounded-xl bg-slate-50 border border-slate-100">
-                  <div className="text-lg sm:text-xl font-black text-[#FF5B00] font-heading">
-                    GH₵ 0
-                  </div>
-                  <div className="text-[10px] sm:text-xs text-slate-500">Listing Commission</div>
-                </div>
-              </motion.div>
-            </motion.div>
-
-            {/* Right Column: Visual Stage with Interactive Swipable Tablet */}
-            <motion.div
-              className="lg:col-span-6 flex items-center justify-center pt-2 sm:pt-4"
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 24, scale: 0.98 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.55, ease: [0.22, 1, 0.36, 1] }}
-            >
-              <MockTablet />
-            </motion.div>
-          </div>
+                <span>{link}</span>
+                <ArrowRight className="h-4 w-4" aria-hidden="true" />
+              </Link>
+            </article>
+          ))}
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* SECTION 2: WHY OMNIMALL? (COMPARISON MATRIX) */}
-      <section className="py-14 sm:py-20 bg-slate-50/70 border-y border-slate-200/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center max-w-2xl mx-auto space-y-2 mb-12"
+    <section className="border-y border-slate-200/70 bg-slate-50/70 py-16 sm:py-20">
+      <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-2 lg:px-8">
+        <div className="space-y-3">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            For buyers
+          </span>
+          <h2 className="font-heading text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+            Explore, compare, and choose your next step
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600">
+            Browse and search listings, open product or service details, and save items you want to
+            revisit. Eligible products can be added to your bag; some vendor listings provide a
+            direct phone contact instead. Checkout requires an account and creates an order for
+            seller confirmation.
+          </p>
+          <Link
+            to="/marketplace"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-white px-5 text-sm font-bold text-slate-800 shadow-sm transition hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
           >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
-              The Campus Reality
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#202124] tracking-tight font-heading">
-              Why WhatsApp status commerce fails students.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              Every semester, thousands of cedis are lost to vanishing status updates, unindexed group spam, and risky meetup arrangements. Here is how OmniMall solves it.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-5xl mx-auto">
-            {/* The Old Way: WhatsApp Statuses & Groups */}
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 sm:p-8 rounded-3xl bg-white border border-rose-200/80 shadow-xs space-y-5"
-            >
-              <div className="flex items-center justify-between border-b border-rose-100 pb-4">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-rose-500 block">
-                    The Problem
-                  </span>
-                  <h3 className="text-lg font-black text-slate-900 font-heading">
-                    WhatsApp Statuses & Class Groups
-                  </h3>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-rose-50 flex items-center justify-center text-rose-600 font-bold text-xs">
-                  ✕
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 text-xs text-slate-600">
-                <li className="flex items-start gap-2.5">
-                  <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Listings vanish in 24 hours:</strong> If you miss a classmate's post, the opportunity is gone forever.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Zero searchability:</strong> No way to filter by price, faculty, condition, or course code without endless scrolling.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Spam in academic groups:</strong> Class group chats get flooded with ads, burying important announcements.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Scam & counterfeit risks:</strong> Unverified sellers disappear immediately after taking advance mobile money.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <span className="text-rose-500 font-bold">✕</span>
-                  <span><strong>Overseas delivery platforms:</strong> Weeks of waiting, high international shipping, and customs delays that make no sense for campus living.</span>
-                </li>
-              </ul>
-            </motion.div>
-
-            {/* The OmniMall Way */}
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 sm:p-8 rounded-3xl bg-gradient-to-br from-orange-50/60 via-white to-orange-50/30 border border-orange-200 shadow-sm space-y-5"
-            >
-              <div className="flex items-center justify-between border-b border-orange-200/70 pb-4">
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF5B00] block">
-                    The Solution
-                  </span>
-                  <h3 className="text-lg font-black text-slate-900 font-heading">
-                    OmniMall Campus Marketplace
-                  </h3>
-                </div>
-                <div className="w-8 h-8 rounded-full bg-orange-100 flex items-center justify-center text-[#FF5B00] font-bold text-xs">
-                  ✓
-                </div>
-              </div>
-
-              <ul className="space-y-3.5 text-xs text-slate-700">
-                <li className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Permanent searchable catalog:</strong> Search textbooks, calculators, tech, and services 24/7.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Verified student badges:</strong> Student identity checks ensure you are dealing with genuine peers.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Monitored campus handover spots:</strong> Safe physical exchange locations at UPSA Library, Student Centre, and Hostels.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>Inspect before paying:</strong> Confirm condition in person at the meetup before releasing payment.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
-                  <span><strong>GH₵ 0 commission:</strong> 100% of the sale stays in the student entrepreneur's pocket.</span>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
+            <span>How marketplace listings work</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
-      </section>
 
-      {/* SECTION 3: HOW IT WORKS (SAFE 3-STEP CAMPUS FLOW) */}
-      <section className="py-14 sm:py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center max-w-2xl mx-auto space-y-2 mb-12"
+        <div className="space-y-3 rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm sm:p-8">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            For sellers
+          </span>
+          <h2 className="font-heading text-2xl font-black tracking-tight text-slate-900 sm:text-3xl">
+            Set up a storefront for products or services
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600">
+            Create an account, choose what you offer, and submit your store for review. Once it is
+            approved, seller tools include storefront and listing management, promotions, and order
+            or service-request workspaces.
+          </p>
+          <Link
+            to="/sell"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
           >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
-              Simple & Safe Process
-            </span>
-            <h2 className="text-2xl sm:text-4xl font-black text-[#202124] tracking-tight font-heading">
-              How OmniMall works in 3 steps.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              From discovering a course textbook to meeting up between lectures in Accra.
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {/* Step 1 */}
-            <motion.div
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.45, delay: 0.08, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-3.5 relative hover:border-orange-200 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-2xl bg-orange-100 text-[#FF5B00] font-black flex items-center justify-center text-sm font-heading">
-                01
-              </div>
-              <h3 className="text-base font-extrabold text-slate-900 font-heading">
-                Browse or List on Campus
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Buyers search available listings or services near their hostel or lecture hall. Student sellers snap clear photos and list with Genkit AI-assisted descriptions in under a minute.
-              </p>
-              <span className="text-[11px] font-semibold text-[#FF5B00] block pt-1">
-                Zero listing fees · 100% free
-              </span>
-            </motion.div>
-
-            {/* Step 2 */}
-            <motion.div
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.45, delay: 0.16, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-3.5 relative hover:border-orange-200 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-2xl bg-orange-100 text-[#FF5B00] font-black flex items-center justify-center text-sm font-heading">
-                02
-              </div>
-              <h3 className="text-base font-extrabold text-slate-900 font-heading">
-                Connect Directly via WhatsApp
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Clicking inquiry pre-fills a structured WhatsApp message with the exact item title, agreed price, and requested pickup spot so there is zero confusion or haggling.
-              </p>
-              <span className="text-[11px] font-semibold text-[#FF5B00] block pt-1">
-                Direct peer-to-peer connection
-              </span>
-            </motion.div>
-
-            {/* Step 3 */}
-            <motion.div
-              initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.45, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-              className="p-6 rounded-3xl bg-slate-50 border border-slate-200/80 space-y-3.5 relative hover:border-orange-200 transition-colors"
-            >
-              <div className="w-10 h-10 rounded-2xl bg-orange-100 text-[#FF5B00] font-black flex items-center justify-center text-sm font-heading">
-                03
-              </div>
-              <h3 className="text-base font-extrabold text-slate-900 font-heading">
-                Public Handover & Payment
-              </h3>
-              <p className="text-xs text-slate-600 leading-relaxed">
-                Meet during daylight at a designated campus landmark (like the UPSA Library or Food Court). Inspect the item physically, test functionality, and complete payment directly.
-              </p>
-              <span className="text-[11px] font-semibold text-emerald-600 block pt-1">
-                Safe · Daylight · Physical verification
-              </span>
-            </motion.div>
-          </div>
+            <span>Seller tools and onboarding</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* SECTION 4: INTERACTIVE STUDENT FEE CALCULATOR */}
-      <section className="py-14 sm:py-20 bg-slate-900 text-white border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6 space-y-4"
-            >
-              <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00] block">
-                Empowering Student Income
-              </span>
-              <h2 className="text-2xl sm:text-4xl font-black tracking-tight font-heading">
-                Keep 100% of every cedi you earn on campus.
-              </h2>
-              <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-                Commercial e-commerce platforms deduct 15% to 25% on every transaction. OmniMall believes university student entrepreneurs should retain every cedi to cover tuition, hostel rent, and supplies.
-              </p>
-              <div className="pt-2">
-                <Link
-                  to="/sell"
-                  className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-[#FF5B00] hover:bg-orange-600 text-white text-xs font-bold transition-colors"
-                >
-                  <Store className="w-4 h-4" />
-                  <span>Start Selling on Campus for Free</span>
-                </Link>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20, scale: 0.98 }}
-              whileInView={{ opacity: 1, x: 0, scale: 1 }}
-              viewport={{ once: true, margin: "-60px" }}
-              transition={{ duration: 0.5, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              className="lg:col-span-6"
-            >
-              <div className="bg-white/5 border border-white/10 rounded-3xl p-6 sm:p-8 space-y-5">
-                <div className="flex items-center justify-between text-xs font-semibold">
-                  <span className="text-slate-300">Set Your Listing Price:</span>
-                  <span className="text-xl font-black text-orange-400 font-heading">GH₵ {sellingPrice}</span>
-                </div>
-
-                <input
-                  type="range"
-                  min="20"
-                  max="2000"
-                  step="10"
-                  value={sellingPrice}
-                  onChange={(e) => setSellingPrice(Number(e.target.value))}
-                  className="w-full accent-[#FF5B00] cursor-pointer"
-                />
-
-                <div className="grid grid-cols-2 gap-4 pt-4 border-t border-white/10 text-xs">
-                  <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 space-y-1">
-                    <span className="text-[11px] text-slate-400 block">OmniMall Commission:</span>
-                    <strong className="text-emerald-400 font-black text-lg font-heading">GH₵ 0.00 (0%)</strong>
-                    <span className="text-[10px] text-slate-400 block">No hidden fees</span>
-                  </div>
-                  <div className="p-3.5 rounded-2xl bg-orange-500/10 border border-orange-500/20 space-y-1">
-                    <span className="text-[11px] text-orange-300 block">You Receive In Full:</span>
-                    <strong className="text-white font-black text-lg font-heading">GH₵ {sellingPrice}.00</strong>
-                    <span className="text-[10px] text-orange-200 block">Direct MoMo / Cash</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
+    <section className="bg-white py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-10 max-w-2xl space-y-3 text-center sm:mb-12">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            The campus reality
+          </span>
+          <h2 className="font-heading text-2xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            Give campus listings a place of their own.
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
+            Informal posts can be easy to miss in a busy conversation. OmniMall organizes product
+            discovery, service offers, and community posts into dedicated app experiences.
+          </p>
         </div>
-      </section>
 
-      {/* SECTION 5: CAMPUS EXPANSION ROADMAP */}
-      <section className="py-14 sm:py-20 bg-slate-50/70 border-b border-slate-200/60">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-60px" }}
-            transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="text-center max-w-xl mx-auto space-y-2 mb-8"
-          >
-            <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
-              Campus Rollout
-            </span>
-            <h2 className="text-2xl sm:text-3xl font-black text-[#202124] tracking-tight font-heading">
-              Active at UPSA. Rolling out across Ghana.
-            </h2>
-            <p className="text-xs sm:text-sm text-slate-600">
-              Select a campus to explore active hubs and designated pickup landmarks.
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.45, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
-            className="flex items-center justify-center gap-1.5 overflow-x-auto pb-3 no-scrollbar"
-          >
-            {CAMPUSES.map((campus) => (
-              <button
-                key={campus.id}
-                onClick={() => setActiveCampusTab(campus.id)}
-                className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
-                  activeCampusTab === campus.id
-                    ? 'bg-[#FF5B00] text-white shadow-xs'
-                    : 'bg-white text-slate-600 border border-slate-200 hover:text-slate-900'
-                }`}
-              >
-                {campus.shortCode}
-              </button>
-            ))}
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20, scale: 0.99 }}
-            whileInView={{ opacity: 1, y: 0, scale: 1 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-4 max-w-3xl mx-auto bg-white rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-xs space-y-4"
-          >
-            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-100 pb-3">
+        <div className="mx-auto grid max-w-6xl gap-5 lg:grid-cols-2">
+          <article className="rounded-3xl border border-rose-200 bg-white p-6 shadow-sm sm:p-8">
+            <div className="flex items-start justify-between gap-4 border-b border-rose-100 pb-4">
               <div>
-                <h3 className="text-lg sm:text-xl font-black text-[#202124] font-heading">
-                  {selectedCampusData.name}
+                <span className="text-[10px] font-bold uppercase tracking-wider text-rose-600">
+                  The challenge
+                </span>
+                <h3 className="mt-1 font-heading text-lg font-black text-slate-900 sm:text-xl">
+                  Finding an offer in a busy feed
                 </h3>
-                <span className="text-xs text-slate-500">{selectedCampusData.city} · {selectedCampusData.studentCountEstimate}</span>
               </div>
-              <span className="self-start sm:self-center text-[11px] font-bold px-2.5 py-1 rounded-full bg-orange-50 text-[#FF5B00] border border-orange-200">
-                {selectedCampusData.status}
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-rose-50 text-rose-600">
+                <X className="h-4 w-4" aria-hidden="true" />
               </span>
             </div>
+            <ul className="mt-5 space-y-4">
+              {[
+                'Product and service posts can get mixed in with other conversation.',
+                'It may take extra effort to compare different offers and their details.',
+                'A post may not show the seller information or next step in one consistent place.',
+                'Offers shared in separate channels can be harder to revisit later.',
+              ].map((item) => (
+                <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">
+                  <X className="mt-0.5 h-4 w-4 shrink-0 text-rose-500" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+          </article>
 
-            <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-              {selectedCampusData.description}
-            </p>
-
-            {selectedCampusData.pickupSpots && (
-              <div className="space-y-1.5 pt-1">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 block">
-                  Designated Campus Handover Landmarks:
+          <article className="rounded-3xl border border-orange-200 bg-gradient-to-br from-white to-orange-50/40 p-6 shadow-sm sm:p-8">
+            <div className="flex items-start justify-between gap-4 border-b border-orange-100 pb-4">
+              <div>
+                <span className="text-[10px] font-bold uppercase tracking-wider text-[#FF5B00]">
+                  The OmniMall approach
                 </span>
-                <div className="flex flex-wrap gap-2">
-                  {selectedCampusData.pickupSpots.map((spot, i) => (
-                    <span
-                      key={i}
-                      className="px-2.5 py-1 text-xs bg-slate-50 text-slate-700 rounded-lg border border-slate-200/70 flex items-center gap-1.5"
-                    >
-                      <MapPin className="w-3 h-3 text-[#FF5B00]" />
-                      <span>{spot}</span>
-                    </span>
-                  ))}
-                </div>
+                <h3 className="mt-1 font-heading text-lg font-black text-slate-900 sm:text-xl">
+                  Dedicated spaces for discovery
+                </h3>
               </div>
-            )}
-          </motion.div>
+              <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-orange-100 text-[#FF5B00]">
+                <CheckCircle2 className="h-4 w-4" aria-hidden="true" />
+              </span>
+            </div>
+            <ul className="mt-5 space-y-4">
+              {[
+                'Search across products, services, brands, and stores.',
+                'Use available sorting options such as price and rating.',
+                'Review product details, seller or store information, and available actions.',
+                'Explore posts, topics, and vendor content in a separate community feed.',
+              ].map((item) => (
+                <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-700">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" aria-hidden="true" />
+                  <span>{item}</span>
+                </li>
+              ))}
+            </ul>
+            <p className="mt-5 border-t border-orange-100 pt-4 text-xs leading-relaxed text-slate-500">
+              Listing visibility, seller activity, and availability depend on what is currently
+              published in the app.
+            </p>
+          </article>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* FINAL CALL TO ACTION */}
-      <section className="py-16 sm:py-20 bg-slate-900 text-white text-center">
-        <motion.div
-          initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-60px" }}
-          transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-          className="max-w-2xl mx-auto px-4 space-y-4"
-        >
-          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00] block">
-            Join the Campus Network
+    <section className="bg-[#0F172A] py-16 text-white sm:py-20">
+      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
+        <div className="space-y-4">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF6B2B]">
+            Seller tools
           </span>
-          <h2 className="text-2xl sm:text-4xl font-black tracking-tight font-heading">
-            Experience structured campus commerce today.
+          <h2 className="font-heading text-2xl font-black leading-tight tracking-tight sm:text-4xl">
+            Manage your campus offers in one workspace.
           </h2>
-          <p className="text-xs sm:text-sm text-slate-400 leading-relaxed">
-            Whether you are buying course materials, upgrading study equipment, or launching a student business at UPSA, OmniMall is built for you.
+          <p className="max-w-xl text-sm leading-relaxed text-slate-300 sm:text-base">
+            Create a product storefront or a service-provider profile, organize what you offer,
+            and manage the enquiries or orders shown in your seller workspace.
           </p>
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-3 pt-3">
-            <Link
-              to="/marketplace"
-              className="w-full sm:w-auto px-6 py-3.5 text-xs font-bold text-white bg-[#FF5B00] hover:bg-orange-600 active:scale-95 rounded-xl transition-all shadow-xs"
-            >
-              Explore Campus Marketplace
-            </Link>
-            <Link
-              to="/sell"
-              className="w-full sm:w-auto px-6 py-3.5 text-xs font-bold text-white bg-white/10 hover:bg-white/20 active:scale-95 border border-white/20 rounded-xl transition-all"
-            >
-              Open Free Student Storefront
-            </Link>
+          <Link
+            to="/sell"
+            className="inline-flex min-h-11 items-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <Store className="h-4 w-4" aria-hidden="true" />
+            <span>Explore seller tools</span>
+          </Link>
+        </div>
+
+        <div className="rounded-3xl border border-slate-700 bg-slate-800/80 p-5 shadow-2xl sm:p-7">
+          <div className="flex items-center justify-between gap-3 border-b border-slate-700 pb-4">
+            <div>
+              <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400">
+                Seller workspace preview
+              </span>
+              <h3 className="mt-1 font-heading text-lg font-bold text-white">
+                Your offers, organized
+              </h3>
+            </div>
+            <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-orange-500/15 text-[#FF6B2B]">
+              <ClipboardList className="h-5 w-5" aria-hidden="true" />
+            </span>
           </div>
-        </motion.div>
-      </section>
-    </div>
-  );
-};
+
+          <div className="mt-4 grid gap-3 sm:grid-cols-2">
+            {[
+              {
+                icon: PackageSearch,
+                title: 'Product listings',
+                copy: 'Details, photos, price, quantity, and draft or active status.',
+              },
+              {
+                icon: SlidersHorizontal,
+                title: 'Store promotions',
+                copy: 'Create banners, discounts, and product offers.',
+              },
+              {
+                icon: MessageCircle,
+                title: 'Service enquiries',
+                copy: 'Review enquiries and prepare quotes for services.',
+              },
+              {
+                icon: WalletCards,
+                title: 'Order workspace',
+                copy: 'View order details and available order statuses.',
+              },
+            ].map(({ icon: Icon, title, copy }) => (
+              <div key={title} className="rounded-2xl border border-slate-700 bg-slate-900/60 p-4">
+                <div className="flex items-center gap-2 text-[#FF6B2B]">
+                  <Icon className="h-4 w-4" aria-hidden="true" />
+                  <h4 className="text-xs font-bold text-white">{title}</h4>
+                </div>
+                <p className="mt-2 text-xs leading-relaxed text-slate-400">{copy}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-4 flex items-start gap-2 rounded-xl border border-amber-400/20 bg-amber-400/10 p-3">
+            <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-amber-300" aria-hidden="true" />
+            <p className="text-xs leading-relaxed text-slate-300">
+              New stores are reviewed before selling tools unlock. Confirm current fees and payment
+              arrangements with OmniMall; a fee or payout schedule is not confirmed here.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-gradient-to-b from-[#FFF9F5] to-white py-16 sm:py-20">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mx-auto mb-8 max-w-2xl space-y-3 text-center">
+          <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
+            Campus discovery
+          </span>
+          <h2 className="font-heading text-2xl font-black tracking-tight text-slate-900 sm:text-4xl">
+            Stay connected to campus conversations.
+          </h2>
+          <p className="text-sm leading-relaxed text-slate-600 sm:text-base">
+            The app includes a Campus feed alongside For You, Trends, and Vendors. Browse posts and
+            follow product or store tags to discover more.
+          </p>
+        </div>
+
+        <div className="mx-auto grid max-w-5xl items-center gap-5 rounded-3xl border border-slate-200/80 bg-white p-5 shadow-sm sm:p-8 lg:grid-cols-[1fr_auto]">
+          <div className="flex items-start gap-4">
+            <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-orange-50 text-[#FF5B00]">
+              <MapPin className="h-5 w-5" aria-hidden="true" />
+            </span>
+            <div>
+              <h3 className="font-heading text-lg font-black text-slate-900">
+                Campus content in your feed
+              </h3>
+              <p className="mt-1 max-w-2xl text-sm leading-relaxed text-slate-600">
+                Switch between feed tabs and explore posts by topic. The app’s buyer flow does not
+                establish a campus selector or guarantee activity at a specific university.
+              </p>
+            </div>
+          </div>
+          <Link
+            to="/campuses"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-200 px-5 text-sm font-bold text-slate-800 transition-colors hover:border-orange-200 hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
+          >
+            <span>Campus information</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+      </div>
+    </section>
+
+    <section className="bg-[#0F172A] py-16 text-center text-white sm:py-20">
+      <div className="mx-auto max-w-3xl space-y-4 px-4 sm:px-6 lg:px-8">
+        <span className="text-xs font-bold uppercase tracking-wider text-[#FF6B2B]">
+          Join the campus network
+        </span>
+        <h2 className="font-heading text-2xl font-black leading-tight tracking-tight sm:text-4xl">
+          Explore OmniMall or learn how to offer something of your own.
+        </h2>
+        <p className="text-sm leading-relaxed text-slate-300 sm:text-base">
+          Browse the buyer and seller guides, or contact the team to ask about current app access
+          and onboarding.
+        </p>
+        <div className="flex flex-col justify-center gap-3 pt-2 sm:flex-row">
+          <Link
+            to="/marketplace"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <span>Explore marketplace guide</span>
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+          <Link
+            to="/sell"
+            className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-600 px-5 text-sm font-bold text-white transition-colors hover:border-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-white"
+          >
+            <span>Seller guide</span>
+            <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
+          </Link>
+        </div>
+        <p className="pt-1 text-xs text-slate-400">
+          Current buyer and seller app production URLs have not been verified.
+        </p>
+      </div>
+    </section>
+  </div>
+);

@@ -6,6 +6,7 @@ import { Footer } from './components/layout/Footer';
 import { ScrollToTop } from './components/layout/ScrollToTop';
 import { PageTransition } from './components/layout/PageTransition';
 import { BackToTop } from './components/ui/BackToTop';
+import { ScrollRevealEffects } from './components/layout/ScrollRevealEffects';
 
 import { HomePage } from './pages/HomePage';
 import { MarketplacePage } from './pages/MarketplacePage';
@@ -52,6 +53,7 @@ export default function App() {
     <BrowserRouter>
       <div className="app-shell min-h-screen flex flex-col bg-white text-[#202124]">
         <ScrollToTop />
+        <ScrollRevealEffects />
         <Navbar />
         <main id="main-content" className="app-main flex-1">
           <AnimatedRoutes />

@@ -3,10 +3,17 @@ import { NavLink, useLocation, Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   ArrowRight,
-  Store,
+  CircleHelp,
   Compass,
-  ShieldCheck,
   FileText,
+  Headset,
+  Home,
+  Info,
+  MapPin,
+  ShieldCheck,
+  ShoppingBag,
+  Store,
+  Wrench,
 } from 'lucide-react';
 import { Logo } from './Logo';
 
@@ -53,12 +60,21 @@ export const Navbar: React.FC = () => {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { label: 'Home', path: '/' },
-    { label: 'Marketplace', path: '/marketplace' },
-    { label: 'Sell on Omnimall', path: '/sell' },
-    { label: 'Services', path: '/services' },
-    { label: 'Explore', path: '/explore' },
-    { label: 'Campuses', path: '/campuses' },
+    { label: 'Home', path: '/', icon: Home },
+    { label: 'Marketplace', path: '/marketplace', icon: ShoppingBag },
+    { label: 'Sell on Omnimall', path: '/sell', icon: Store },
+    { label: 'Services', path: '/services', icon: Wrench },
+    { label: 'Campuses', path: '/campuses', icon: MapPin },
+    { label: 'Explore', path: '/explore', icon: Compass },
+  ];
+
+  const mobileMenuLinks = [
+    ...navLinks.slice(0, -1),
+    { label: 'About Us', path: '/about', icon: Info },
+    { label: 'Support', path: '/contact', icon: Headset },
+    { label: 'Help & FAQ', path: '/help', icon: CircleHelp },
+    { label: 'Privacy Policy', path: '/privacy', icon: ShieldCheck },
+    { label: 'Terms & Conditions', path: '/terms', icon: FileText },
   ];
 
   return (
@@ -77,7 +93,7 @@ export const Navbar: React.FC = () => {
         />
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Mobile Bar: Modern Asymmetric Dash Hamburger (Left), Centered Logo Card, Explore Button (Right) */}
+          {/* Mobile bar: hamburger menu and centered logo */}
           <div className="flex md:hidden items-center justify-between h-[62px] relative">
             {/* Modern Hamburger Button with Animated Dashes */}
             <button
@@ -119,15 +135,12 @@ export const Navbar: React.FC = () => {
             <div className="absolute left-1/2 -translate-x-1/2 flex items-center justify-center pointer-events-auto">
               <Logo size="sm" center={true} showWordmark={true} />
             </div>
-
-            {/* Right: Modern Explore Pill Button (Replaced Search Icon) */}
             <Link
               to="/explore"
-              className="group inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/95 hover:bg-white text-xs font-bold text-slate-800 hover:text-[#FF5B00] border border-orange-200/90 shadow-2xs hover:shadow-xs active:scale-95 transition-all"
-              aria-label="Explore campus marketplace"
+              className="inline-flex min-h-11 items-center gap-1.5 rounded-full border border-orange-200 bg-white/90 px-3 text-xs font-bold text-slate-800 transition-colors hover:border-orange-300 hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
             >
-              <Compass className="w-3.5 h-3.5 text-[#FF5B00] group-hover:rotate-45 transition-transform duration-300" />
-              <span className="tracking-tight">Explore</span>
+              <Compass className="h-3.5 w-3.5 text-[#FF5B00]" aria-hidden="true" />
+              <span>Explore</span>
             </Link>
           </div>
 
@@ -179,7 +192,7 @@ export const Navbar: React.FC = () => {
                 className="group inline-flex items-center justify-center gap-1.5 px-4 sm:px-5 py-2.5 text-xs font-bold text-white bg-[#FF5B00] hover:bg-orange-600 active:scale-98 rounded-xl shadow-xs hover:shadow-[0_4px_14px_rgba(255,91,0,0.25)] transition-all duration-150 whitespace-nowrap focus-visible:ring-2 focus-visible:ring-[#FF5B00]"
               >
                 <Store className="w-3.5 h-3.5 text-white/90" />
-                <span>Open Storefront</span>
+                <span>Seller Guide</span>
                 <ArrowRight className="w-3 h-3 group-hover:translate-x-0.5 transition-transform" />
               </Link>
             </div>
@@ -208,32 +221,38 @@ export const Navbar: React.FC = () => {
               animate={{ x: 0 }}
               exit={{ x: '-100%' }}
               transition={{ type: 'spring', damping: 28, stiffness: 320 }}
-              className="relative mr-auto w-[84%] max-w-[320px] bg-white h-full shadow-2xl flex flex-col z-10 border-r border-orange-100"
+              className="relative mr-auto w-[84%] max-w-[320px] bg-white h-full shadow-2xl flex flex-col z-10 border-r border-orange-100 overflow-hidden"
             >
+              <img
+                src="/1.png"
+                alt=""
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-[76px] bottom-0 h-[calc(100%-76px)] w-full object-cover object-[center_30%] blur-[1px] opacity-55"
+              />
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-[76px] bottom-0 bg-white/55"
+              />
+
               {/* Drawer Header */}
-              <div className="flex items-center justify-between px-5 py-4 border-b border-orange-100 bg-[#FFF9F5]">
-                <Logo size="sm" showWordmark={true} />
-                <button
-                  type="button"
-                  onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 text-slate-600 hover:text-[#FF5B00] rounded-xl hover:bg-orange-100/60 active:scale-95 transition-all focus:outline-none"
-                  aria-label="Close menu"
-                >
-                  {/* Matching modern active dash cross */}
-                  <div className="w-5 h-5 flex flex-col justify-center items-center relative">
-                    <span className="w-4 h-[2px] bg-slate-700 rounded-full rotate-45 absolute" />
-                    <span className="w-4 h-[2px] bg-[#FF5B00] rounded-full -rotate-45 absolute" />
+              <div className="relative z-10 flex h-[76px] shrink-0 items-center justify-center px-5 border-b border-orange-700/30 bg-[#FF5B00] shadow-md shadow-orange-950/10">
+                <div className="flex items-center justify-center gap-2.5">
+                  <Logo size="sm" />
+                  <div className="flex flex-col leading-none">
+                    <span className="text-sm font-black tracking-tight text-white">OMNIMALL</span>
+                    <span className="mt-1 text-[8px] font-bold uppercase tracking-[0.08em] text-white/80">
+                      Campus Marketplace
+                    </span>
                   </div>
-                </button>
+                </div>
               </div>
 
-              {/* Drawer Links with staggered cascading reveals */}
-              <div className="p-5 flex-1 overflow-y-auto space-y-5">
+              <nav
+                aria-label="Mobile navigation"
+                className="relative z-10 flex min-h-0 flex-1 flex-col overflow-y-auto px-5 pt-2 pb-4"
+              >
                 <div className="space-y-1">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-2">
-                    Navigation
-                  </span>
-                  {navLinks.map((link, idx) => (
+                  {mobileMenuLinks.map((link, idx) => (
                     <motion.div
                       key={link.path}
                       initial={{ opacity: 0, x: -18 }}
@@ -243,116 +262,60 @@ export const Navbar: React.FC = () => {
                         duration: 0.25,
                         ease: [0.22, 1, 0.36, 1],
                       }}
-                      whileTap={{ scale: 0.98 }}
+                      whileTap={{ scale: 0.99 }}
                     >
                       <NavLink
                         to={link.path}
                         end={link.path === '/'}
                         className={({ isActive }) =>
-                          `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-sm font-semibold transition-all ${
-                            isActive
-                              ? 'text-white bg-[#FF5B00] font-bold shadow-xs'
-                              : 'text-slate-700 hover:bg-orange-50 hover:text-[#FF5B00]'
+                          `flex min-h-11 items-center gap-3 border-b border-dashed border-orange-500/80 px-2.5 text-sm font-medium transition-colors duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-[#FF5B00] ${
+                            isActive ? 'text-[#D94E00]' : 'text-slate-800 hover:bg-white/45 hover:text-[#D94E00]'
                           }`
                         }
                       >
-                        <span>{link.label}</span>
-                        <ArrowRight className="w-4 h-4 opacity-70" />
+                        {({ isActive }) => (
+                          <span className="flex items-center gap-3">
+                            <link.icon
+                              aria-hidden="true"
+                              className={`h-4 w-4 shrink-0 ${isActive ? 'text-[#D94E00]' : 'text-slate-700'}`}
+                            />
+                            <span>{link.label}</span>
+                          </span>
+                        )}
                       </NavLink>
                     </motion.div>
                   ))}
                 </div>
 
-                {/* About Us UI Card in Mobile Drawer */}
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.3, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  <Link
-                    to="/about"
-                    className="block p-4 rounded-2xl bg-gradient-to-br from-orange-50 via-white to-orange-50/50 border border-orange-200/90 shadow-2xs space-y-2 text-xs group hover:border-[#FF5B00]/40 transition-all"
-                  >
-                    <div className="flex items-center justify-between">
-                      <span className="text-[10px] font-black uppercase tracking-wider text-[#FF5B00]">
-                        About OmniMall
+                <div className="mt-auto pt-4">
+                  <div className="rounded-2xl border border-white/90 bg-white/85 p-3 shadow-lg shadow-slate-900/10 backdrop-blur-md">
+                    <div className="mb-1.5 flex items-center gap-2">
+                      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-orange-100 text-[#FF5B00]">
+                        <Info aria-hidden="true" className="h-4 w-4" />
                       </span>
-                      <ArrowRight className="w-3.5 h-3.5 text-slate-400 group-hover:translate-x-0.5 group-hover:text-[#FF5B00] transition-all" />
+                      <h2 className="text-[13px] font-bold text-slate-900">Get to know our story</h2>
                     </div>
-                    <strong className="text-slate-900 font-bold block text-sm font-heading">
-                      The Campus Commerce Network
-                    </strong>
-                    <p className="text-slate-600 text-[11px] leading-relaxed">
-                      Connecting verified student buyers, campus storefronts, and skilled peer freelancers starting at UPSA in Accra.
+                    <p className="mb-1.5 text-[11px] leading-snug text-slate-600">
+                      Discover how OmniMall connects campus communities.
                     </p>
-                    <div className="flex items-center gap-1.5 text-[11px] font-bold text-[#FF5B00] pt-0.5">
-                      <span>Learn Our Story & Mission</span>
-                      <ArrowRight className="w-3 h-3" />
-                    </div>
-                  </Link>
-                </motion.div>
+                    <Link
+                      to="/about"
+                      className="inline-flex min-h-10 items-center gap-1.5 text-xs font-bold text-[#D94E00] hover:text-orange-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#FF5B00] focus-visible:ring-offset-2"
+                    >
+                      Read our story
+                      <ArrowRight aria-hidden="true" className="h-3.5 w-3.5" />
+                    </Link>
+                  </div>
+                </div>
+              </nav>
 
-                {/* Quick Action */}
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.36, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  whileTap={{ scale: 0.98 }}
-                  className="pt-2"
-                >
-                  <Link
-                    to="/sell"
-                    className="w-full inline-flex items-center justify-center gap-2 px-5 py-3 text-xs font-bold text-white bg-[#FF5B00] hover:bg-orange-600 rounded-xl shadow-xs transition-colors"
-                  >
-                    <Store className="w-4 h-4" />
-                    <span>Open Student Storefront</span>
-                  </Link>
-                </motion.div>
-
-                {/* Legal & Campus Policies in Hamburger Menu */}
-                <motion.div
-                  initial={{ opacity: 0, y: 14 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.42, duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
-                  className="pt-4 border-t border-slate-100 space-y-1"
-                >
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-slate-400 px-3 block mb-1">
-                    Policies & Terms
-                  </span>
-                  <NavLink
-                    to="/privacy"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                        isActive
-                          ? 'text-white bg-[#FF5B00] font-bold shadow-xs'
-                          : 'text-slate-600 hover:bg-orange-50 hover:text-[#FF5B00]'
-                      }`
-                    }
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <ShieldCheck className="w-4 h-4 text-[#FF5B00]" />
-                      <span>Privacy Policy</span>
-                    </div>
-                    <ArrowRight className="w-3.5 h-3.5 opacity-60" />
-                  </NavLink>
-                  <NavLink
-                    to="/terms"
-                    className={({ isActive }) =>
-                      `flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-semibold transition-all ${
-                        isActive
-                          ? 'text-white bg-[#FF5B00] font-bold shadow-xs'
-                          : 'text-slate-600 hover:bg-orange-50 hover:text-[#FF5B00]'
-                      }`
-                    }
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <FileText className="w-4 h-4 text-[#FF5B00]" />
-                      <span>Terms & Conditions (T&C)</span>
-                    </div>
-                    <ArrowRight className="w-3.5 h-3.5 opacity-60" />
-                  </NavLink>
-                </motion.div>
+              <div className="relative z-10 border-t border-slate-200/80 bg-white/90 px-5 py-4 pb-[calc(1rem+env(safe-area-inset-bottom))] text-center backdrop-blur-md">
+                <p className="text-xs font-semibold tracking-wide text-slate-800">
+                  OMNIMALL INC. <span className="font-normal text-slate-500">© 2026</span>
+                </p>
+                <p className="mt-1 text-[11px] leading-relaxed text-slate-500">
+                  Connecting campus communities through commerce.
+                </p>
               </div>
             </motion.div>
           </div>

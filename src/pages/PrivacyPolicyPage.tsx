@@ -1,283 +1,136 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { motion, useReducedMotion } from 'framer-motion';
-import {
-  ShieldCheck,
-  Lock,
-  Clock,
-  Sparkles,
-  ArrowLeft,
-  CheckCircle2,
-  AlertCircle,
-  Mail,
-  ChevronRight,
-  ExternalLink,
-  FileText,
-  UserCheck,
-  Share2,
-} from 'lucide-react';
+import { ArrowLeft, CircleAlert, ShieldCheck } from 'lucide-react';
 
-interface PrivacySection {
-  id: string;
-  title: string;
-  summary: string;
-  content: string[];
-}
-
-const SECTIONS: PrivacySection[] = [
+const sections = [
   {
-    id: 'scope',
-    title: '1. Introduction & Campus Scope',
-    summary: 'OmniMall is built specifically for university campus communities. We collect only what is strictly necessary to run a safe student marketplace.',
-    content: [
-      'OmniMall ("we", "our", or "the platform") operates a structured digital marketplace connecting student buyers, independent student storefronts, and skilled peer freelancers across university campuses in Ghana, beginning with our flagship campus at the University of Professional Studies, Accra (UPSA).',
-      'This Privacy Policy applies to the official website (omnimall.app) and the OmniMall mobile/web applications. It explains in clear, transparent language what personal information we collect, how it is stored, how it is used to safeguard campus commerce, and your legal rights over your data.',
+    title: 'Information used in the apps',
+    body: [
+      'The buyer app signup flow asks for a name, email address, and password, and also offers Google sign-in. The seller app offers email-and-password or Google sign-up. Seller storefront setup can include a store name, public handle, category, description, phone number, and location.',
+      'Product listings can include names and descriptions, photos, category, condition, price, quantity, and optional SKU details. Service profiles can include service descriptions, pricing, availability, service area, contact information, and sample images.',
+      'The buyer app supports product orders and service enquiries. The admin interface displays order identifiers, values, statuses, dates, seller IDs, item details, buyer names and emails. Service enquiry forms can include a message and optional preferred date.',
+      'Explore posts support likes, comments, sharing, and saving. The reviewed screens do not establish the full set of data recorded for these interactions or how long that information is retained.',
     ],
   },
   {
-    id: 'collection',
-    title: '2. Information We Collect',
-    summary: 'We collect your name, institutional email, phone number, and student credentials solely to verify your campus identity.',
-    content: [
-      'Account Registration: When you register as a student buyer or merchant, we collect your full name, student institutional email address (e.g., student@upsamail.edu.gh), and an optional active phone number.',
-      'Student Identity Verification: To grant the "Verified Student Merchant" badge, sellers submit a photograph or screenshot of their student ID card or active university portal dashboard. This document is reviewed by student moderators solely to verify active enrollment.',
-      'Listing & Storefront Details: Information you voluntarily post—such as listing titles, descriptions, photos, prices in Ghanaian Cedis (GH₵), and designated campus meetup spots (e.g. UPSA Library Walkway)—is publicly visible to other campus users.',
-      'Usage & Diagnostics: Standard, non-invasive diagnostic logs (browser type, device operating system, error logs) to maintain application uptime and performance.',
+    title: 'Operational and moderation access',
+    body: [
+      'The reviewed admin tools can display shop-owner names, email addresses, phone numbers, and locations, as well as buyer and order information. Admin workflows include store approval, rejection, suspension, or restoration and product-status changes. Some moderation actions record a reason and an admin audit event.',
+      'These screens establish that the information is available to the administration interface; they do not establish the complete list of people or service providers who may access information, the legal basis for access, or any retention period.',
     ],
   },
   {
-    id: 'use',
-    title: '3. How We Use Your Information',
-    summary: 'We use your data only to verify student accounts, enable direct peer communication, and prevent fraudulent listings.',
-    content: [
-      'Facilitating Campus Connections: Connecting student buyers with verified sellers and peer service providers on their campus.',
-      'Maintaining Campus Safety & Trust: Ensuring every seller with a verified badge is an accountable student attending the university.',
-      'Platform Notifications: Delivering transaction status updates, service enquiry alerts, and important security advisories.',
-      'Zero Advertising Trackers: We never sell student data, contact lists, or shopping histories to third-party data brokers or marketing ad networks.',
-    ],
-  },
-  {
-    id: 'financial',
-    title: '4. Financial Privacy & MoMo Safety',
-    summary: 'OmniMall never asks for, processes, or stores your Mobile Money PIN, banking passwords, or card numbers.',
-    content: [
-      'Peer-to-Peer Direct Payments: Transactions on OmniMall are completed face-to-face on campus. Buyers inspect products in person and transfer money directly to the seller via MTN Mobile Money, Telecel Cash, AT Money, or physical cash.',
-      'Zero Stored Financial Data: Because payments occur directly between peer wallets, OmniMall does not hold your funds, store bank credentials, or charge hidden payment gateway cuts.',
-      'The Zero Advance Deposit Rule: We strictly forbid sellers from demanding advance deposits or booking fees. Never share financial PINs with anyone.',
-    ],
-  },
-  {
-    id: 'sharing',
-    title: '5. Information Sharing & Third-Party Services',
-    summary: 'Your information is only shared when required to provide the service (e.g., Firebase Authentication).',
-    content: [
-      'Other Campus Students: Your public store handle, public listings, and designated campus meetup spots are visible to students browsing the catalog.',
-      'Cloud Infrastructure: We utilize Google Cloud / Firebase for secure user authentication, database operations, and encrypted media storage.',
-      'Legal & University Authorities: In the rare event of verified criminal activity, identity theft, or severe fraud, we may cooperate with campus security and law enforcement in accordance with Ghanaian law.',
-    ],
-  },
-  {
-    id: 'rights',
-    title: '6. Your Rights & Account Deletion',
-    summary: 'You can access, modify, or permanently delete your account and listings at any time.',
-    content: [
-      'Access & Correction: You can update your display name, store description, listings, and contact details directly in your account settings.',
-      'Right to Deletion: You may request complete deletion of your account, listings, and uploaded identification verification records by emailing privacy@omnimall.app.',
-      'Retention Period: Upon account deletion, all personal data is permanently wiped from our active databases within 14 business days.',
-    ],
-  },
-  {
-    id: 'contact',
-    title: '7. Contacting Our Campus Privacy Team',
-    summary: 'Have questions or privacy concerns? Reach out directly to our campus data protection desk.',
-    content: [
-      'If you have questions regarding this Privacy Policy or wish to file a data inquiry, please contact our Data Protection Team at privacy@omnimall.app or visit the OmniMall Support Desk located on Floor 1 of the UPSA Student Centre in Accra.',
+    title: 'Visibility and contact',
+    body: [
+      'The seller app provides customer-facing storefronts and shareable shop links. Information a seller chooses to publish in a storefront or listing is intended to appear to people viewing that storefront or listing in the app. The exact visibility controls and audience boundaries require confirmation.',
+      'For a privacy question, contact support@omnimall.app. This contact link opens an email draft; the official website does not send or store the message.',
     ],
   },
 ];
 
-export const PrivacyPolicyPage: React.FC = () => {
-  const shouldReduceMotion = useReducedMotion();
-  const [activeSection, setActiveSection] = useState<string>('scope');
-  const [copiedLink, setCopiedLink] = useState(false);
+const reviewItems = [
+  'Confirm the responsible legal entity, applicable jurisdictions, and purposes and lawful bases for each category of processing.',
+  'Document service providers and other recipients, safeguards, and any international data transfers.',
+  'Set retention and deletion periods, account/data request procedures, security disclosures, and a privacy contact.',
+  'Confirm the public visibility of profile, listing, order, and feed information, and any controls available to users.',
+  'Confirm what payment or financial information, if any, is collected by the apps or service providers.',
+];
 
-  const handleShare = () => {
-    if (navigator.clipboard) {
-      navigator.clipboard.writeText(window.location.href);
-      setCopiedLink(true);
-      setTimeout(() => setCopiedLink(false), 2000);
-    }
-  };
-
-  return (
-    <div className="min-h-screen bg-slate-50/50 pb-20 selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
-      {/* Top Header Banner */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-[#FFF7F0] via-[#FFFBF8] to-white border-b border-slate-200/80 pt-10 sm:pt-14 pb-10 sm:pb-12">
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-4">
-          {/* Breadcrumb Navigation */}
-          <div className="flex items-center justify-between">
-            <Link
-              to="/"
-              className="inline-flex items-center gap-1.5 text-xs font-bold text-slate-500 hover:text-[#FF5B00] transition-colors"
-            >
-              <ArrowLeft className="w-3.5 h-3.5" />
-              <span>Back to Marketplace</span>
-            </Link>
-
-            <button
-              type="button"
-              onClick={handleShare}
-              className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-slate-200 text-xs font-bold text-slate-700 hover:text-[#FF5B00] shadow-2xs transition-colors"
-            >
-              <Share2 className="w-3.5 h-3.5" />
-              <span>{copiedLink ? 'Link Copied!' : 'Share Policy'}</span>
-            </button>
-          </div>
-
-          <div className="space-y-2">
-            <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-orange-100 text-xs font-bold text-[#FF5B00]">
-              <ShieldCheck className="w-3.5 h-3.5" />
-              <span>Campus Data Protection Charter</span>
-            </div>
-
-            <h1 className="text-3xl sm:text-5xl font-black text-[#202124] tracking-tight font-heading">
-              Privacy Policy
-            </h1>
-
-            <p className="text-xs sm:text-base text-slate-600 max-w-2xl leading-relaxed">
-              How OmniMall protects your personal information, student credentials, and marketplace privacy across university campuses.
-            </p>
-          </div>
-
-          <div className="pt-2 flex flex-wrap items-center gap-4 text-xs text-slate-500">
-            <div className="flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5 text-[#FF5B00]" />
-              <span>Last Updated: November 2026</span>
-            </div>
-            <span>·</span>
-            <div className="flex items-center gap-1.5">
-              <Lock className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Zero Advertising Trackers</span>
-            </div>
-            <span>·</span>
-            <div>5 min read</div>
-          </div>
+export const PrivacyPolicyPage: React.FC = () => (
+  <div className="min-h-screen bg-slate-50/50 pb-20 selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
+    <section className="border-b border-slate-200/80 bg-gradient-to-b from-[#FFF7F0] via-[#FFFBF8] to-white py-10 sm:py-14">
+      <div className="mx-auto max-w-5xl space-y-4 px-4 sm:px-6 lg:px-8">
+        <Link
+          to="/"
+          className="inline-flex min-h-11 items-center gap-2 text-sm font-semibold text-slate-600 transition-colors hover:text-[#FF5B00]"
+        >
+          <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+          Back to OmniMall
+        </Link>
+        <div>
+          <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-100/80 px-3 py-1 text-xs font-bold text-[#FF5B00]">
+            <ShieldCheck className="h-3.5 w-3.5" />
+            Privacy information
+          </span>
+          <h1 className="mt-3 font-heading text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
+            Privacy Policy
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+            A factual overview of data visible in the current OmniMall app workflows and
+            administration screens.
+          </p>
         </div>
-      </section>
+      </div>
+    </section>
 
-      {/* Main Policy Content & Navigation Layout */}
-      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 pt-10">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-          {/* Left Table of Contents (Sticky on Desktop) */}
-          <aside className="hidden lg:block lg:col-span-4 bg-white rounded-3xl border border-slate-200/90 shadow-xs p-5 sticky top-24 space-y-4">
-            <div className="flex items-center gap-2 border-b border-slate-100 pb-3">
-              <FileText className="w-4 h-4 text-[#FF5B00]" />
-              <span className="text-xs font-bold uppercase tracking-wider text-slate-800 font-heading">
-                Table of Contents
-              </span>
-            </div>
+    <main className="mx-auto max-w-5xl space-y-6 px-4 pt-8 sm:px-6 sm:pt-10 lg:px-8">
+      <div
+        role="note"
+        className="flex items-start gap-3 rounded-3xl border border-amber-300 bg-amber-50 p-5 text-amber-950 sm:p-6"
+      >
+        <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
+        <div>
+          <h2 className="font-heading text-sm font-black uppercase tracking-wide">
+            Draft — pending legal review
+          </h2>
+          <p className="mt-1 text-sm leading-relaxed">
+            Prepared from the current product screens. This is not a final policy. Qualified legal
+            counsel and the responsible OmniMall team must confirm the marked gaps and approve the
+            final notice before it is relied on.
+          </p>
+        </div>
+      </div>
 
-            <nav className="space-y-1">
-              {SECTIONS.map((sec) => (
-                <a
-                  key={sec.id}
-                  href={`#${sec.id}`}
-                  onClick={() => setActiveSection(sec.id)}
-                  className={`block px-3 py-2 rounded-xl text-xs font-semibold transition-all ${
-                    activeSection === sec.id
-                      ? 'bg-orange-50 text-[#FF5B00] font-bold'
-                      : 'text-slate-600 hover:bg-slate-50 hover:text-slate-900'
-                  }`}
-                >
-                  {sec.title}
-                </a>
-              ))}
-            </nav>
-
-            {/* Quick Contact Box */}
-            <div className="p-4 rounded-2xl bg-orange-50/70 border border-orange-100 space-y-2 text-xs">
-              <span className="font-bold text-slate-800 block">Need Data Assistance?</span>
-              <p className="text-slate-600 text-[11px] leading-relaxed">
-                Contact our privacy compliance desk for account deletion or data access requests.
+      {sections.map((section) => (
+        <article
+          key={section.title}
+          className="rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm sm:p-8"
+        >
+          <h2 className="font-heading text-xl font-black text-slate-900">{section.title}</h2>
+          <div className="mt-4 space-y-3">
+            {section.body.map((paragraph) => (
+              <p key={paragraph} className="text-sm leading-relaxed text-slate-600">
+                {paragraph}
               </p>
-              <a
-                href="mailto:privacy@omnimall.app"
-                className="inline-flex items-center gap-1 text-[11px] font-bold text-[#FF5B00] hover:underline"
-              >
-                <span>privacy@omnimall.app</span>
-                <ChevronRight className="w-3 h-3" />
-              </a>
-            </div>
-          </aside>
-
-          {/* Right Column: Detailed Sections */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Plain English Banner */}
-            <div className="p-5 sm:p-6 rounded-3xl bg-gradient-to-r from-orange-500 to-[#FF5B00] text-white shadow-md space-y-2">
-              <div className="flex items-center gap-2">
-                <Sparkles className="w-5 h-5 text-orange-200" />
-                <h2 className="text-sm sm:text-base font-bold font-heading">
-                  Our Promise to University Students
-                </h2>
-              </div>
-              <p className="text-xs text-orange-100 leading-relaxed">
-                We believe students deserve complete respect for their personal data. We never sell student records, we never track you across the internet, and your student ID is used solely to keep the marketplace safe from anonymous scammers.
-              </p>
-            </div>
-
-            {/* Rendered Policy Sections */}
-            {SECTIONS.map((sec) => (
-              <article
-                key={sec.id}
-                id={sec.id}
-                className="p-6 sm:p-8 rounded-3xl bg-white border border-slate-200/90 shadow-2xs space-y-4 scroll-mt-24"
-              >
-                <div className="space-y-1">
-                  <h3 className="text-base sm:text-lg font-black text-slate-900 font-heading">
-                    {sec.title}
-                  </h3>
-                </div>
-
-                {/* Plain English Summary Callout */}
-                <div className="p-3.5 rounded-2xl bg-orange-50/80 border border-orange-100 flex items-start gap-2.5 text-xs text-slate-800">
-                  <CheckCircle2 className="w-4 h-4 text-[#FF5B00] shrink-0 mt-0.5" />
-                  <div>
-                    <span className="font-bold text-slate-900">In Plain English: </span>
-                    <span className="text-slate-700">{sec.summary}</span>
-                  </div>
-                </div>
-
-                {/* Body Paragraphs */}
-                <div className="space-y-2.5 text-xs sm:text-sm text-slate-600 leading-relaxed pt-1">
-                  {sec.content.map((para, pIdx) => (
-                    <p key={pIdx}>{para}</p>
-                  ))}
-                </div>
-              </article>
             ))}
-
-            {/* Related Terms & Help Callout */}
-            <div className="p-6 rounded-3xl bg-white border border-slate-200/80 shadow-xs flex flex-col sm:flex-row items-center justify-between gap-4">
-              <div className="space-y-1 text-center sm:text-left">
-                <h4 className="text-sm font-bold text-slate-900 font-heading">
-                  Looking for our Terms & Conditions?
-                </h4>
-                <p className="text-xs text-slate-500">
-                  Review the campus trading rules, buyer responsibilities, and seller standards.
-                </p>
-              </div>
-              <Link
-                to="/terms"
-                className="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-orange-50 hover:bg-[#FF5B00] text-[#FF5B00] hover:text-white text-xs font-bold transition-all shrink-0"
-              >
-                <span>Read Terms of Use</span>
-                <ChevronRight className="w-3.5 h-3.5" />
-              </Link>
-            </div>
           </div>
-        </div>
-      </main>
-    </div>
-  );
-};
+        </article>
+      ))}
 
+      <article className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
+        <h2 className="font-heading text-xl font-black text-slate-900">
+          Items requiring confirmation before publication
+        </h2>
+        <ul className="mt-4 space-y-3">
+          {reviewItems.map((item) => (
+            <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">
+              <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-amber-500" />
+              {item}
+            </li>
+          ))}
+        </ul>
+      </article>
+
+      <div className="rounded-3xl border border-slate-200/80 bg-white p-6 sm:p-8">
+        <h2 className="font-heading text-lg font-bold text-slate-900">Privacy questions</h2>
+        <p className="mt-2 text-sm leading-relaxed text-slate-600">
+          Contact{' '}
+          <a
+            href="mailto:support@omnimall.app?subject=Privacy%20question"
+            className="font-semibold text-[#FF5B00] underline underline-offset-2"
+          >
+            support@omnimall.app
+          </a>
+          . The link opens an email draft; this website does not send or store your message.
+        </p>
+        <Link
+          to="/terms"
+          className="mt-5 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#FF5B00] hover:text-orange-700"
+        >
+          <span>Read the Terms & Conditions draft</span>
+          <ArrowLeft className="h-4 w-4 rotate-180" aria-hidden="true" />
+        </Link>
+      </div>
+    </main>
+  </div>
+);
