@@ -94,7 +94,7 @@ export const Navbar: React.FC = () => {
 
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           {/* Mobile bar: hamburger menu and centered logo */}
-          <div className="flex md:hidden items-center justify-between h-[62px] relative">
+          <div className="flex lg:hidden items-center justify-between h-[62px] relative">
             {/* Modern Hamburger Button with Animated Dashes */}
             <button
               type="button"
@@ -145,7 +145,7 @@ export const Navbar: React.FC = () => {
           </div>
 
           {/* Desktop Bar Layout: Logo + Wordmark on Left, Nav in Middle, CTA on Right */}
-          <div className="hidden md:flex items-center justify-between gap-6 h-20">
+          <div className="hidden lg:flex items-center justify-between gap-6 h-20">
             <div className="flex items-center shrink-0">
               <Logo size="md" showWordmark={true} />
             </div>
@@ -178,7 +178,7 @@ export const Navbar: React.FC = () => {
               {/* About Us UI Card Button */}
               <Link
                 to="/about"
-                className="hidden lg:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 hover:bg-white border border-orange-200/90 hover:border-orange-300 text-xs font-bold text-slate-800 hover:text-[#FF5B00] shadow-2xs hover:shadow-xs transition-all duration-150 group"
+                className="hidden xl:inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-white/90 hover:bg-white border border-orange-200/90 hover:border-orange-300 text-xs font-bold text-slate-800 hover:text-[#FF5B00] shadow-2xs hover:shadow-xs transition-all duration-150 group"
                 aria-label="About OmniMall"
               >
                 <span className="w-1.5 h-1.5 rounded-full bg-[#FF5B00] group-hover:scale-125 transition-transform" />

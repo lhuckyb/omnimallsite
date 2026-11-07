@@ -58,8 +58,8 @@ export const MockTablet: React.FC = () => {
   const CurrentIcon = currentScreen.icon;
 
   return (
-    <div className="mx-auto w-full max-w-[650px]">
-      <div className="rounded-[2.4rem] border border-slate-300 bg-slate-200 p-2 shadow-[0_24px_70px_rgba(15,23,42,0.2)] sm:rounded-[2.8rem] sm:p-3">
+    <div className="mx-auto w-full min-w-0 max-w-[650px]">
+      <div className="min-w-0 rounded-[2.4rem] border border-slate-300 bg-slate-200 p-2 shadow-[0_24px_70px_rgba(15,23,42,0.2)] sm:rounded-[2.8rem] sm:p-3">
         <div className="rounded-[2rem] bg-[#090D16] p-2 sm:rounded-[2.35rem] sm:p-3">
           <div className="overflow-hidden rounded-[1.55rem] bg-[#080D1C] sm:rounded-[1.9rem]">
             <div className="flex h-7 items-center justify-between border-b border-white/10 bg-[#0A0D16] px-4 text-[8px] font-semibold text-slate-200 sm:h-8 sm:px-5 sm:text-[9px]">
@@ -109,7 +109,7 @@ export const MockTablet: React.FC = () => {
               initial={shouldReduceMotion ? false : { opacity: 0.7 }}
               animate={{ opacity: 1 }}
               transition={{ duration: shouldReduceMotion ? 0 : 0.24 }}
-              className="relative aspect-[1.3] min-h-[310px] overflow-hidden sm:min-h-[380px]"
+              className="relative aspect-[1.3] min-h-[220px] overflow-hidden sm:min-h-[380px]"
             >
               <img
                 src={currentScreen.image}

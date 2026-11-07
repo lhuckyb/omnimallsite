@@ -73,8 +73,8 @@ export const HomePage: React.FC = () => (
     />
 
     <section className="overflow-hidden border-b border-orange-100 bg-gradient-to-br from-[#FFFCF9] via-white to-[#FFF3E9] py-10 sm:py-14 lg:py-16">
-      <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
-        <div className="space-y-5 lg:col-span-6">
+      <div className="mx-auto grid max-w-7xl min-w-0 items-center gap-8 px-4 sm:px-6 lg:grid-cols-12 lg:gap-10 lg:px-8">
+        <div className="min-w-0 space-y-5 lg:col-span-6">
           <span className="text-xs font-bold uppercase tracking-wider text-[#FF5B00]">
             Campus marketplace
           </span>
@@ -102,7 +102,7 @@ export const HomePage: React.FC = () => (
             </Link>
           </div>
         </div>
-        <div className="lg:col-span-6">
+        <div className="min-w-0 lg:col-span-6">
           <MockTablet />
           <p className="mt-3 text-center text-xs text-slate-500">
             Illustrative interface preview — not live listings or account data.
