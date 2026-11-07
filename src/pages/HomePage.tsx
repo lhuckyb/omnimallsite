@@ -46,7 +46,7 @@ const highlights = [
 ];
 
 export const HomePage: React.FC = () => (
-  <div className="min-h-screen overflow-x-hidden bg-white text-[#202124] selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
+  <div className="min-h-screen overflow-x-clip bg-white text-[#202124] selection:bg-[#FF5B00]/15 selection:text-[#FF5B00]">
     <DotField
       headline="Sell with ease, Buy with confidence."
       backgroundImage="/2.png"
