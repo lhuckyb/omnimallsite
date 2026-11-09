@@ -4,36 +4,36 @@ import { ArrowLeft, CircleAlert, ShieldCheck } from 'lucide-react';
 
 const sections = [
   {
-    title: 'Information used in the apps',
+    title: 'Information in our apps',
     body: [
-      'The buyer app signup flow asks for a name, email address, and password, and also offers Google sign-in. The seller app offers email-and-password or Google sign-up. Seller storefront setup can include a store name, public handle, category, description, phone number, and location.',
-      'Product listings can include names and descriptions, photos, category, condition, price, quantity, and optional SKU details. Service profiles can include service descriptions, pricing, availability, service area, contact information, and sample images.',
-      'The buyer app supports product orders and service enquiries. The admin interface displays order identifiers, values, statuses, dates, seller IDs, item details, buyer names and emails. Service enquiry forms can include a message and optional preferred date.',
-      'Explore posts support likes, comments, sharing, and saving. The reviewed screens do not establish the full set of data recorded for these interactions or how long that information is retained.',
+      'When you create a buyer account, the app asks for your name, email address, and password. You can also sign in with Google. Sellers can create an account with an email address and password or with Google. When setting up a storefront, sellers can provide a store name, public handle, category, description, phone number, and location.',
+      'Product listings can include a name, description, photos, category, condition, price, quantity, and optional SKU details. Service profiles can include service descriptions, pricing, availability, service area, contact information, and sample images.',
+      'Buyers can place product orders and send service enquiries. The administration interface displays order identifiers, values, statuses, dates, seller IDs, item details, and buyer names and email addresses. A service enquiry can include a message and an optional preferred date.',
+      'Explore posts support likes, comments, sharing, and saving. We are still confirming exactly what information these interactions record and how long it is kept.',
     ],
   },
   {
     title: 'Operational and moderation access',
     body: [
-      'The reviewed admin tools can display shop-owner names, email addresses, phone numbers, and locations, as well as buyer and order information. Admin workflows include store approval, rejection, suspension, or restoration and product-status changes. Some moderation actions record a reason and an admin audit event.',
-      'These screens establish that the information is available to the administration interface; they do not establish the complete list of people or service providers who may access information, the legal basis for access, or any retention period.',
+      'The administration interface displays shop-owner names, email addresses, phone numbers, and locations, as well as buyer and order information. Administrators can approve, reject, suspend, or restore stores and change product statuses. Some moderation actions record a reason and an audit event.',
+      'We are formalizing who may access personal information, the purposes for that access, and how long different types of information are kept.',
     ],
   },
   {
     title: 'Visibility and contact',
     body: [
-      'The seller app provides customer-facing storefronts and shareable shop links. Information a seller chooses to publish in a storefront or listing is intended to appear to people viewing that storefront or listing in the app. The exact visibility controls and audience boundaries require confirmation.',
-      'For a privacy question, contact support@omnimall.app. This contact link opens an email draft; the official website does not send or store the message.',
+      'The seller app provides customer-facing storefronts and shareable shop links. Information a seller publishes in a storefront or listing is intended to be visible to people viewing it in the app. We are still confirming the exact visibility controls and audience for each type of information.',
+      'For privacy questions, contact support@omnimall.app. The link opens an email draft; this website does not send or store your message.',
     ],
   },
 ];
 
 const reviewItems = [
-  'Confirm the responsible legal entity, applicable jurisdictions, and purposes and lawful bases for each category of processing.',
-  'Document service providers and other recipients, safeguards, and any international data transfers.',
-  'Set retention and deletion periods, account/data request procedures, security disclosures, and a privacy contact.',
-  'Confirm the public visibility of profile, listing, order, and feed information, and any controls available to users.',
-  'Confirm what payment or financial information, if any, is collected by the apps or service providers.',
+  'Which legal entity operates OmniMall, which privacy laws apply, and the purposes and legal grounds for using each type of information.',
+  'Which service providers receive information, what safeguards apply, and whether information is transferred internationally.',
+  'How long we keep information, how deletion and data requests work, and what security details we can share.',
+  'Who can see profile, listing, order, and feed information, and what visibility controls are available.',
+  'Whether our apps or service providers collect payment or other financial information.',
 ];
 
 export const PrivacyPolicyPage: React.FC = () => (
@@ -50,14 +50,13 @@ export const PrivacyPolicyPage: React.FC = () => (
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-100/80 px-3 py-1 text-xs font-bold text-[#FF5B00]">
             <ShieldCheck className="h-3.5 w-3.5" />
-            Privacy information
+            OmniMall's current policy
           </span>
           <h1 className="mt-3 font-heading text-3xl font-black tracking-tight text-slate-900 sm:text-5xl">
             Privacy Policy
           </h1>
           <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
-            A factual overview of data visible in the current OmniMall app workflows and
-            administration screens.
+            How OmniMall currently handles personal information in its apps and administration tools.
           </p>
         </div>
       </div>
@@ -71,12 +70,12 @@ export const PrivacyPolicyPage: React.FC = () => (
         <CircleAlert className="mt-0.5 h-5 w-5 shrink-0 text-amber-700" aria-hidden="true" />
         <div>
           <h2 className="font-heading text-sm font-black uppercase tracking-wide">
-            Draft — pending legal review
+            Our current rules — not yet legally finalized
           </h2>
           <p className="mt-1 text-sm leading-relaxed">
-            Prepared from the current product screens. This is not a final policy. Qualified legal
-            counsel and the responsible OmniMall team must confirm the marked gaps and approve the
-            final notice before it is relied on.
+            This page describes OmniMall's current privacy rules and practices. We intend to follow
+            them while we complete a formal legal review and finalize the policy for the laws that
+            apply. The remaining step is formal legal review and approval.
           </p>
         </div>
       </div>
@@ -99,8 +98,12 @@ export const PrivacyPolicyPage: React.FC = () => (
 
       <article className="rounded-3xl border border-amber-200 bg-white p-6 shadow-sm sm:p-8">
         <h2 className="font-heading text-xl font-black text-slate-900">
-          Items requiring confirmation before publication
+          Details we are still formalizing
         </h2>
+        <p className="mt-3 text-sm leading-relaxed text-slate-600">
+          Some details are not yet fully established. We are working to define them clearly rather
+          than present unconfirmed practices as settled rules.
+        </p>
         <ul className="mt-4 space-y-3">
           {reviewItems.map((item) => (
             <li key={item} className="flex gap-3 text-sm leading-relaxed text-slate-600">

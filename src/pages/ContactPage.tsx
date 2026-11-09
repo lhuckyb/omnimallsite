@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, HelpCircle, Mail } from 'lucide-react';
+import { ArrowRight, HelpCircle, Mail, MessageCircle, Phone } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
   const shouldReduceMotion = useReducedMotion();
@@ -40,18 +40,18 @@ export const ContactPage: React.FC = () => {
           <p className="mt-2 text-sm leading-relaxed text-slate-600">
             Send your question to{' '}
             <a
-              href="mailto:support@omnimall.app"
+              href="mailto:omnimallinc@gmail.com"
               className="font-semibold text-[#FF5B00] underline underline-offset-2"
             >
-              support@omnimall.app
+              omnimallinc@gmail.com
             </a>
             . You can include relevant details in your email.
           </p>
           <a
-            href="mailto:support@omnimall.app"
+            href="mailto:omnimallinc@gmail.com"
             className="mt-6 inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
           >
-            <span>Email support</span>
+            <span>Email OmniMall</span>
             <ArrowRight className="h-4 w-4" />
           </a>
           <p className="mt-3 text-xs leading-relaxed text-slate-500">
@@ -61,6 +61,41 @@ export const ContactPage: React.FC = () => {
         </div>
 
         <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm sm:p-8">
+          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-orange-100 text-[#FF5B00]">
+            <Phone className="h-5 w-5" />
+          </div>
+          <h2 className="mt-5 font-heading text-xl font-black text-slate-900">Call or WhatsApp</h2>
+          <p className="mt-2 text-sm leading-relaxed text-slate-600">
+            Call us or send a WhatsApp message at{' '}
+            <a
+              href="tel:0597204494"
+              className="font-semibold text-[#FF5B00] underline underline-offset-2"
+            >
+              059 720 4494
+            </a>
+            .
+          </p>
+          <div className="mt-6 flex flex-wrap gap-3">
+            <a
+              href="tel:0597204494"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-[#FF5B00] px-5 text-sm font-bold text-white transition-colors hover:bg-orange-600 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
+            >
+              <Phone className="h-4 w-4" aria-hidden="true" />
+              Call us
+            </a>
+            <a
+              href="https://wa.me/233597204494"
+              target="_blank"
+              rel="noreferrer"
+              className="inline-flex min-h-11 items-center justify-center gap-2 rounded-full border border-slate-200 px-5 text-sm font-bold text-slate-800 transition-colors hover:border-orange-200 hover:text-[#FF5B00] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#FF5B00]"
+            >
+              <MessageCircle className="h-4 w-4" aria-hidden="true" />
+              WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <div className="rounded-3xl border border-slate-200/90 bg-white p-6 shadow-sm sm:p-8 lg:col-span-2">
           <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-100 text-slate-700">
             <HelpCircle className="h-5 w-5" />
           </div>
