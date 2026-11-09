@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
-    <loc>https://omnimall.vercel.app/</loc>
+    <loc>https://omnimall.online/</loc>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/marketplace</loc>
+    <loc>https://omnimall.online/marketplace</loc>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/sell</loc>
+    <loc>https://omnimall.online/sell</loc>
     <changefreq>monthly</changefreq>
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/services</loc>
+    <loc>https://omnimall.online/services</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/explore</loc>
+    <loc>https://omnimall.online/explore</loc>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/campuses</loc>
+    <loc>https://omnimall.online/campuses</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/about</loc>
+    <loc>https://omnimall.online/about</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/help</loc>
+    <loc>https://omnimall.online/help</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/contact</loc>
+    <loc>https://omnimall.online/contact</loc>
     <changefreq>monthly</changefreq>
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/privacy</loc>
+    <loc>https://omnimall.online/privacy</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/terms</loc>
+    <loc>https://omnimall.online/terms</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://omnimall.vercel.app/cookies</loc>
+    <loc>https://omnimall.online/cookies</loc>
     <changefreq>yearly</changefreq>
     <priority>0.2</priority>
   </url>
